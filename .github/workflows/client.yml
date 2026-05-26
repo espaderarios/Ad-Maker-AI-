@@ -1,0 +1,6 @@
+name: client
+
+on:
+  push:
+    paths:
+      - 'client/**'

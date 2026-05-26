@@ -1,0 +1,11 @@
+name = "ad-maker-ai-workers"
+main = "./src/index.js"
+compatibility_date = "2026-01-01"
+compatibility_flags = [ "nodejs_compat" ]
+
+[env.production]
+name = "ad-maker-ai-workers-prod"
+
+d1_databases = [
+	{ binding = "DB", database_name = "ad_maker_ai_d1", database_id = "710a570b-c7ca-4f99-ab99-74a352a9ea7a" }
+]

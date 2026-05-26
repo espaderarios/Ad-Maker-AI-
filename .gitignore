@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+coverage
+.DS_Store
+.env
+.env.*
+!.env.example
+client/dist
+server/dist
+remotion/dist
+server/src/temp/*
+!server/src/temp/.gitkeep

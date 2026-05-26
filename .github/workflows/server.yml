@@ -1,0 +1,6 @@
+name: server
+
+on:
+  push:
+    paths:
+      - 'server/**'

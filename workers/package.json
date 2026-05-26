@@ -1,0 +1,17 @@
+{
+  "name": "ad-maker-ai-workers",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --outfile=dist/index.js --platform=browser --format=esm --minify",
+    "dev": "wrangler dev"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jose": "^6.2.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.0",
+    "wrangler": "^3.0.0"
+  }
+}

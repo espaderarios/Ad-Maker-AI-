@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Fullscreen Login UI</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      background: #e9e9e9;
+    }
+
+    body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* =========================
+       BACKGROUND PATTERN
+    ========================= */
+
+    body::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.35) 25%,
+          transparent 25%
+        ),
+
+        linear-gradient(
+          225deg,
+          rgba(255,255,255,0.35) 25%,
+          transparent 25%
+        ),
+
+        linear-gradient(
+          315deg,
+          rgba(255,255,255,0.35) 25%,
+          transparent 25%
+        ),
+
+        linear-gradient(
+          45deg,
+          rgba(255,255,255,0.35) 25%,
+          transparent 25%
+        );
+
+      background-size: 120px 120px;
+
+      opacity: 0.25;
+
+      z-index: 0;
+    }
+
+    /* =========================
+       MAIN CARD
+    ========================= */
+
+    .login-card {
+      position: relative;
+      z-index: 5;
+
+      width: 100vw;
+      height: 100vh;
+
+      display: flex;
+
+      overflow: hidden;
+
+      background: white;
+    }
+
+    /* =========================
+       LEFT PANEL
+    ========================= */
+
+    .left-panel {
+      flex: 1.2;
+
+      position: relative;
+
+      overflow: hidden;
+
+      color: white;
+
+      padding: 50px 70px;
+
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(255,255,255,0.06),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #050505,
+          #0f0f0f
+        );
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    nav {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .nav-login {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+
+      border-bottom: 2px solid white;
+
+      padding-bottom: 8px;
+    }
+
+    /* =========================
+       WELCOME TEXT
+    ========================= */
+
+    .welcome {
+      position: absolute;
+
+      left: 70px;
+      bottom: 70px;
+
+      font-size: 92px;
+      line-height: 0.95;
+      font-weight: 900;
+
+      max-width: 700px;
+
+      z-index: 10;
+    }
+
+    /* =========================
+       RIGHT PANEL
+    ========================= */
+
+    .right-panel {
+      width: 42%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 70px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #fafafa,
+          #f1f1f1
+        );
+    }
+
+    /* =========================
+       FORM CONTAINER
+    ========================= */
+
+    .form-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .title {
+      font-size: 72px;
+      font-weight: 900;
+      letter-spacing: -3px;
+
+      margin-bottom: 50px;
+
+      color: #111;
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* =========================
+       INPUTS
+    ========================= */
+
+    .input {
+      width: 100%;
+
+      border: none;
+      outline: none;
+
+      background: #e6e6e6;
+
+      padding: 20px 24px;
+
+      border-radius: 999px;
+
+      font-size: 16px;
+      font-weight: 500;
+
+      transition: 0.3s ease;
+    }
+
+    .input:focus {
+      background: #dcdcdc;
+
+      transform: scale(1.01);
+
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.05);
+    }
+
+    .input::placeholder {
+      color: #888;
+    }
+
+    /* =========================
+       OPTIONS
+    ========================= */
+
+    .options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-top: -4px;
+      margin-bottom: 6px;
+
+      font-size: 14px;
+      color: #666;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .remember input {
+      transform: scale(1.1);
+    }
+
+    .forgot {
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .forgot:hover {
+      color: black;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .login-btn,
+    .signup-btn {
+      width: 100%;
+
+      border: none;
+
+      border-radius: 999px;
+
+      padding: 20px;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: all 0.3s ease;
+    }
+
+    .login-btn {
+      background:
+        linear-gradient(
+          135deg,
+          #0d1117,
+          #1b2430
+        );
+
+      color: white;
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .login-btn:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.2);
+    }
+
+    .signup-btn {
+      background: #dfdfdf;
+      color: #111;
+    }
+
+    .signup-btn:hover {
+      background: #d6d6d6;
+    }
+
+    /* =========================
+       DIVIDER
+    ========================= */
+
+    .divider {
+      position: relative;
+
+      text-align: center;
+
+      color: #888;
+
+      margin: 8px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+
+      position: absolute;
+
+      top: 50%;
+
+      width: 42%;
+      height: 1px;
+
+      background: #cfcfcf;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    /* =========================
+       DECORATIVE RINGS
+    ========================= */
+
+    .ring {
+      position: absolute;
+
+      border-radius: 50%;
+
+      border: 18px solid rgba(207,214,223,0.9);
+
+      z-index: 1;
+    }
+
+    .ring-1 {
+      width: 360px;
+      height: 360px;
+
+      top: 130px;
+      left: -140px;
+    }
+
+    .ring-2 {
+      width: 520px;
+      height: 520px;
+
+      top: 20px;
+      right: -220px;
+    }
+
+    .ring-3 {
+      width: 360px;
+      height: 360px;
+
+      bottom: -160px;
+      right: 110px;
+    }
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 1200px) {
+
+      .login-card {
+        flex-direction: column;
+      }
+
+      .left-panel {
+        min-height: 45vh;
+      }
+
+      .right-panel {
+        width: 100%;
+      }
+
+      .welcome {
+        position: relative;
+
+        left: auto;
+        bottom: auto;
+
+        margin-top: 100px;
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .left-panel,
+      .right-panel {
+        padding: 28px;
+      }
+
+      .title {
+        font-size: 48px;
+      }
+
+      .welcome {
+        font-size: 54px;
+      }
+
+      .logo {
+        font-size: 30px;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .left-panel,
+      .right-panel {
+        padding: 22px;
+      }
+
+      .title {
+        font-size: 40px;
+      }
+
+      .welcome {
+        font-size: 42px;
+      }
+
+      .options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <main class="login-card">
+
+    <!-- LEFT SIDE -->
+
+    <section class="left-panel">
+
+      <nav>
+        <h1 class="logo">
+          Borcelle.
+        </h1>
+
+        <span class="nav-login">
+          LOG IN
+        </span>
+      </nav>
+
+      <!-- DECORATIVE RINGS -->
+
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+
+      <h2 class="welcome">
+        Welcome Back!
+      </h2>
+
+    </section>
+
+    <!-- RIGHT SIDE -->
+
+    <section class="right-panel">
+
+      <div class="form-container">
+
+        <h1 class="title">
+          Log in
+        </h1>
+
+        <form>
+
+          <input
+            class="input"
+            type="email"
+            placeholder="Email"
+          />
+
+          <input
+            class="input"
+            type="password"
+            placeholder="Password"
+          />
+
+          <div class="options">
+
+            <label class="remember">
+              <input type="checkbox" />
+              Remember Me
+            </label>
+
+            <span class="forgot">
+              Forgot Password?
+            </span>
+
+          </div>
+
+          <button class="login-btn">
+            Log in
+          </button>
+
+          <div class="divider">
+            Or
+          </div>
+
+          <button
+            type="button"
+            class="signup-btn"
+          >
+            Sign up
+          </button>
+
+        </form>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

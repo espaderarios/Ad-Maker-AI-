@@ -1,0 +1,14 @@
+{
+  "name": "ai-video-ad-maker-remotion",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion build"
+  },
+  "dependencies": {
+    "ai-video-ad-maker": "file:..",
+    "remotion": "^4.0.351"
+  }
+}

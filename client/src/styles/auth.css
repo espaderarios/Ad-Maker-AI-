@@ -1,0 +1,4 @@
+@import './login.css';
+
+/* Shared auth helpers (kept minimal) */
+.auth-hidden { display:none; }
