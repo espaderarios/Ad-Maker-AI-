@@ -4,3 +4,10 @@ on:
   push:
     paths:
       - 'client/**'
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
